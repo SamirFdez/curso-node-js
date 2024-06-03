@@ -24,5 +24,8 @@
   "homepage": "https://github.com/SamirFdez/curso-node-js#readme",
   "dependencies": {
     "picocolors": "^1.0.1"
+  },
+  "devDependencies": {
+    "standard": "^17.1.0"
   }
 }
