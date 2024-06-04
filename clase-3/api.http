@@ -1,0 +1,16 @@
+### Recuperar todos las peliculas
+GET http://localhost:1234/movies
+
+### Recuperar una pelicula mediante el id
+GET http://localhost:1234/movies/dcdd0fad-a94c-4810-8acc-5f108d3b18c3
+
+### Recuperar todas las peliculas de una categoria
+GET http://localhost:1234/movies?genre=action
+
+### Recuperar todas las peliculas de una fecha
+GET http://localhost:1234/movies?year=1994
+
+### Recuperar todas las peliculas por multiples query
+GET http://localhost:1234/movies?genre=crime&year=1994
+
+
