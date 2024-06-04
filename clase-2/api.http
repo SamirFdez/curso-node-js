@@ -12,3 +12,6 @@ Content-Type: application/json
         "transform"
     ]
 }
+
+### ERROR NOT FOUND
+GET http://localhost:1234/pokemon/fdsfdfdfdf

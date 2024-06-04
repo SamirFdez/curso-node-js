@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/SamirFdez/curso-node-js#readme",
   "dependencies": {
+    "express": "4.19.2",
     "picocolors": "^1.0.1"
   },
   "devDependencies": {
