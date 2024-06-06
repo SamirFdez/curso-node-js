@@ -23,7 +23,7 @@ app.use(
       }
 
       if (!origin) {
-        return callback(null, false);
+        return callback(null, true);
       }
 
       return callback(new Error("Not allowed by CORS"));
