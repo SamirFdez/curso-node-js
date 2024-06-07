@@ -30,10 +30,13 @@ Content-Type: application/json
   ]
 }
 
+### Borrar una película mediante el id
+DELETE http://localhost:1234/movies/9ccbfa3f-165f-446b-9bdc-d5fe0e82f863
+
 ### Actualizar una pelicula
 PATCH http://localhost:1234/movies/dcdd0fad-a94c-4810-8acc-5f108d3b18c3
 Content-Type: application/json
 
-# {
-#     "year": 2024
-# }
+{
+    "year": 2024
+}
