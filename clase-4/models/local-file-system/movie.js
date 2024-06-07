@@ -1,4 +1,4 @@
-import movies from '../movies.json' with { type: 'json'}
+import movies from '../../movies.json' with { type: 'json'}
 import { randomUUID } from "node:crypto";
 
 export class MovieModel {
@@ -47,6 +47,7 @@ export class MovieModel {
     return true
   }
 
+// Actualizar una pelicula mediante el id
   static async update({ id, input }) {
     const movieIndex = movies.findIndex((movie) => movie.id === id);
     if (movieIndex === -1) return false;
