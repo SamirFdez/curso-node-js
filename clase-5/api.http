@@ -34,9 +34,10 @@ Content-Type: application/json
 DELETE http://localhost:1234/movies/f4ef4094-2766-11ef-95c2-c46516b8f44f
 
 ### Actualizar una pelicula
-PATCH http://localhost:1234/movies/dcdd0fad-a94c-4810-8acc-5f108d3b18c3
+PATCH http://localhost:1234/movies/e1fc341f-2766-11ef-95c2-c46516b8f44f
 Content-Type: application/json
 
 {
-    "year": 2024
+    "year": 2024,
+    "duration": 150
 }

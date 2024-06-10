@@ -159,5 +159,15 @@ export class MovieModel {
   }
 
   // Actualizar una pelicula mediante el id
-  static async update({ id, input }) {}
+  static async update({ id, input }) {
+    if (id.length !== 36) return false;
+    const params = [id];
+    const [movies] = await connection.query(queryGetMovieById, params);
+
+    if (movies.length === 0) return false;
+
+    console.log(input);
+
+    return false;
+  }
 }
