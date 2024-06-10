@@ -1,11 +1,8 @@
 ### Recuperar todos las peliculas
 GET http://localhost:1234/movies
 
-### Recuperar una pelicula mediante el id
-GET http://localhost:1234/movies/c8a7d63f-3b04-44d3-9d95-8782fd7dcfaf
-
 ### Recuperar todas las peliculas de una categoria
-GET http://localhost:1234/movies?genre=action
+GET http://localhost:1234/movies?genre=Action
 
 ### Recuperar todas las peliculas de una fecha
 GET http://localhost:1234/movies?year=1994
@@ -13,17 +10,20 @@ GET http://localhost:1234/movies?year=1994
 ### Recuperar todas las peliculas por multiples query
 GET http://localhost:1234/movies?genre=crime&year=1994
 
+### Recuperar una pelicula mediante el id
+GET http://localhost:1234/movies/9a4bc21c-2766-11ef-95c2-c46516b8f44
+
 ### Crear una pelicula
 POST http://localhost:1234/movies
 Content-Type: application/json
 
 {
-  "sql": "SELECT * FROM users",
   "title": "The Godfather",
   "year": 1975,
   "director": "Francis Ford Coppola",
   "duration": 175,
   "poster": "https://img.fruugo.com/product/4/49/14441494_max.jpg",
+  "rate": 9.5,
   "genre": [
     "Crime",
     "Drama"
@@ -31,7 +31,7 @@ Content-Type: application/json
 }
 
 ### Borrar una película mediante el id
-DELETE http://localhost:1234/movies/9ccbfa3f-165f-446b-9bdc-d5fe0e82f863
+DELETE http://localhost:1234/movies/f4ef4094-2766-11ef-95c2-c46516b8f44f
 
 ### Actualizar una pelicula
 PATCH http://localhost:1234/movies/dcdd0fad-a94c-4810-8acc-5f108d3b18c3

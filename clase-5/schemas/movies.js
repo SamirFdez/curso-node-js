@@ -32,9 +32,14 @@ const movieSchema = z.object({
     required_error: "Movie director is required",
   }),
   duration: z.number({
+    required_error: "Movie duration is required.",
     invalid_type_error: "Movie duration must be a number",
   }),
-  poster: z.string().url({ message: "Poster must be a valid URL" }),
+  poster: z
+    .string({
+      required_error: "Movie poster is required.",
+    })
+    .url({ message: "Poster must be a valid URL" }),
   genre: z.array(z.enum(genresList), {
     required_error: "Movie genre is required.",
     invalid_type_error: "Movie genre must be an array of enum Genre",
