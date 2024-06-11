@@ -1,20 +1,26 @@
 import { Router } from "express";
 import { MovieController } from "../controllers/movies.js";
 
-export const moviesRouter = Router();
+export const createMovieRouter = ({ movieModel }) => {
+  const moviesRouter = Router();
 
-// Recuperar todos las peliculas
-// Filtrar por genero o por año
-moviesRouter.get("/", MovieController.getAll);
+  const movieController = new MovieController({ movieModel });
 
-// Recuperar una pelicula mediante el id
-moviesRouter.get("/:id", MovieController.getById);
+  // Recuperar todos las peliculas
+  // Filtrar por genero o por año
+  moviesRouter.get("/", movieController.getAll);
 
-// Crear una pelicula
-moviesRouter.post("/", MovieController.create);
+  // Recuperar una pelicula mediante el id
+  moviesRouter.get("/:id", movieController.getById);
 
-// Eliminar una pelicula mediante el id
-moviesRouter.delete("/:id", MovieController.delete);
+  // Crear una pelicula
+  moviesRouter.post("/", movieController.create);
 
-// Actualizar una pelicula mediante el id
-moviesRouter.patch("/:id", MovieController.update);
+  // Eliminar una pelicula mediante el id
+  moviesRouter.delete("/:id", movieController.delete);
+
+  // Actualizar una pelicula mediante el id
+  moviesRouter.patch("/:id", movieController.update);
+
+  return moviesRouter;
+};

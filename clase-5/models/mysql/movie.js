@@ -1,4 +1,5 @@
 import mysql from "mysql2/promise";
+import { object } from "zod";
 
 const config = {
   host: "localhost",
@@ -19,7 +20,7 @@ const queryGetMovieById = `
     m.duration, 
     m.poster, 
     m.rate, 
-    GROUP_CONCAT(g.descripcion) AS genres
+    GROUP_CONCAT(g.description) AS genres
   FROM 
     movie m
   LEFT JOIN 
@@ -45,7 +46,7 @@ export class MovieModel {
         m.duration, 
         m.poster, 
         m.rate, 
-        GROUP_CONCAT(g.descripcion SEPARATOR ', ') AS genres
+        GROUP_CONCAT(g.description SEPARATOR ', ') AS genres
       FROM 
         movie m
       LEFT JOIN 
@@ -63,7 +64,7 @@ export class MovieModel {
           SELECT mg.movie_id
           FROM movie_genres mg
           LEFT JOIN genre g ON mg.genre_id = g.id
-          WHERE g.descripcion = ?
+          WHERE g.description = ?
         )
       `;
       params.push(genre);
@@ -103,32 +104,18 @@ export class MovieModel {
 
   // Crear una pelicula
   static async create({ input }) {
-    const {
-      gnere: genreInput,
-      title,
-      year,
-      director,
-      duration,
-      poster,
-      rate,
-    } = input;
+    const { genre, title, year, director, duration, poster, rate } = input;
 
     const [uuidResult] = await connection.query("SELECT UUID() uuid;");
     const [{ uuid }] = uuidResult;
 
-    const queryInsert = `
-      INSERT INTO movie (id, title, year, director, duration, poster, rate) VALUES
-      (UUID_TO_BIN("${uuid}"), ?, ?, ?, ?, ?, ?);`;
-
     try {
-      await connection.query(queryInsert, [
-        title,
-        year,
-        director,
-        duration,
-        poster,
-        rate,
-      ]);
+      await connection.query(
+        `
+      INSERT INTO movie (id, title, year, director, duration, poster, rate) VALUES
+      (UUID_TO_BIN("${uuid}"), ?, ?, ?, ?, ?, ?);`,
+        [title, year, director, duration, poster, rate]
+      );
     } catch (error) {
       throw new Error("Error creating movie");
     }
@@ -166,8 +153,23 @@ export class MovieModel {
 
     if (movies.length === 0) return false;
 
-    console.log(input);
+    const fields = Object.keys(input)
+      .map((movie) => `${movie} = ?`)
+      .join(", ");
 
-    return false;
+    const values = Object.values(input);
+
+    try {
+      await connection.query(
+        `UPDATE movie set ${fields} WHERE id = UUID_TO_BIN("${id}")`,
+        values
+      );
+    } catch (error) {
+      throw new Error("Error updating movie");
+    }
+
+    const movieUpdate = { ...movies[0], ...input };
+
+    return movieUpdate;
   }
 }

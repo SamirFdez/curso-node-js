@@ -12,6 +12,7 @@ const genresList = [
   "Horror",
   "Thriller",
   "Sci-Fi",
+  "Romance",
 ];
 
 const movieSchema = z.object({
